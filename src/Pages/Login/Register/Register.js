@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvuder/AuthProvider";
 
 const Register = () => {
+  const {createUser} = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(email, password, name);
+    createUser(email,password)
+    .then((result)=>{
+      const user = result.user;
+      event.target.reset();
+      navigate('/')
+      console.log(user);
+     
+
+    })
+    .catch((error)=>{
+      console.error(error);
+    })
   };
   return (
     <Form onSubmit={handleSubmit}>
