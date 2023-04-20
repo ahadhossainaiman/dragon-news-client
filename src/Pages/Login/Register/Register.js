@@ -3,10 +3,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvuder/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const [error,setError] = useState('');
-  const {createUser,updateUserProfile} = useContext(AuthContext);
+  const {verifiedEmail,createUser,updateUserProfile} = useContext(AuthContext);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,10 +21,11 @@ const Register = () => {
       const user = result.user;
       setError('');
       event.target.reset();
-      navigate('/')
-      
+      // navigate('/')
       console.log(user);
-      handleUpdateUserProfile(name,photoURL)
+      handleUpdateUserProfile(name,photoURL);
+      handleVerifiedEmail();
+      toast.success('Please Verified your email address')
      
 
     })
@@ -40,6 +42,14 @@ const Register = () => {
     updateUserProfile(profile)
     .then(()=>{})
     .catch((error)=>{console.error(error);})
+  }
+
+  const handleVerifiedEmail = () =>{
+    verifiedEmail()
+    .then(()=>{})
+    .catch(error=>{
+      console.error(error);
+    })
   }
   return (
     <Form onSubmit={handleSubmit}>
