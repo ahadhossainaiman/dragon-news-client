@@ -38,10 +38,10 @@ export default function Header() {
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">
+            <>
               {user?.uid ? (
                 <>
-                  <span className="me-3">{user?.displayName}</span>
+                  <span className="me-3 my-2">{user?.displayName}</span>
                   <Button onClick={handleLogOut} variant="dark">SignOut</Button>
                 </>
               ) : (
@@ -55,8 +55,8 @@ export default function Header() {
                   </Link>
                 </>
               )}
-            </Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
+            </>
+            <Link  to="/profile">
             {user?.photoURL ? (
                 <Image
                   style={{ height: "30px" }}
@@ -66,7 +66,7 @@ export default function Header() {
               ) : (
                 <FaUser className={user?.displayName  ? 'd-block' :'d-none'}></FaUser>
               )}
-            </Nav.Link>
+            </Link>
           </Nav>
           <div className="d-lg-none">
             <LeftSideNav></LeftSideNav>

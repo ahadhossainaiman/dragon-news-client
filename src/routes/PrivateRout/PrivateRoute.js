@@ -7,7 +7,7 @@ const PrivateRoute = ({children}) => {
     const {user,loader} = useContext(AuthContext);
     const location = useLocation();
     if(loader){
-        return <Spinner animation="grow" variant="primary" />
+        return <Spinner className='d-block mx-auto' animation="grow" variant="primary" />
     }
     if(!user){
         return <Navigate to='/login' state={{from:location}} replace></Navigate>
